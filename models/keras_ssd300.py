@@ -230,7 +230,8 @@ def ssd_300(image_size,
                 n_boxes.append(len(ar) + 1)  # +1 for the second box for aspect ratio 1
             else:
                 n_boxes.append(len(ar))
-    else:  # If only a global aspect ratio list was passed, then the number of boxes is the same for each predictor layer
+    else:  # If only a global aspect ratio list was passed, then the number of boxes is the same for each predictor
+        # layer
         if (1 in aspect_ratios_global) & two_boxes_for_ar1:
             n_boxes = len(aspect_ratios_global) + 1
         else:

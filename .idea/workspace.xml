@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0778d99-4734-4d5e-ab40-13f61cbd77f3" name="Changes" comment="" />
+    <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generator/data_augmentation_chain_constant_input_size.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/data_augmentation_chain_constant_input_size.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generator/object_detection_2d_data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/object_detection_2d_data_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keras_layers/keras_layer_AnchorBoxes.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras_layers/keras_layer_AnchorBoxes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keras_layers/keras_layer_L2Normalization.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras_layers/keras_layer_L2Normalization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keras_loss_function/keras_ssd_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras_loss_function/keras_ssd_loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/keras_ssd300.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/keras_ssd300.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd300_evaluation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ssd300_evaluation.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd300_evaluation_COCO.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ssd300_evaluation_COCO.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd300_inference.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ssd300_inference.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd300_training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ssd300_training.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd300_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/ssd300_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd512_inference.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ssd512_inference.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssd7_training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ssd7_training.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weight_sampling_tutorial.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/weight_sampling_tutorial.ipynb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,8 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="23dQXzJwM2nPYBjfNdUMHssSsiz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="23hZ71cuSDTsGkCF2BB1vIIn2wc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -19,12 +34,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Pycharm Projects\ssd_keras" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Pycharm Projects\ssd_keras\notebooks" />
     </key>
   </component>
   <component name="RunManager">
@@ -58,12 +72,24 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f0778d99-4734-4d5e-ab40-13f61cbd77f3" name="Changes" comment="" />
-      <created>1642061528303</created>
+      <changelist id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="" />
+      <created>1642188111002</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1642061528303</updated>
+      <updated>1642188111002</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

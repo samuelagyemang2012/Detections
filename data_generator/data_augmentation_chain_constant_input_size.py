@@ -18,7 +18,6 @@ limitations under the License.
 
 from __future__ import division
 import numpy as np
-
 from data_generator.object_detection_2d_photometric_ops import ConvertColor, ConvertDataType, ConvertTo3Channels, RandomBrightness, RandomContrast, RandomHue, RandomSaturation
 from data_generator.object_detection_2d_geometric_ops import RandomFlip, RandomTranslate, RandomScale
 from data_generator.object_detection_2d_image_boxes_validation_utils import BoundGenerator, BoxFilter, ImageValidator
@@ -49,7 +48,8 @@ class DataAugmentationConstantInputSize:
                  labels_format={'class_id': 0, 'xmin': 1, 'ymin': 2, 'xmax': 3, 'ymax': 4}):
 
         if (random_scale[0] >= 1) or (random_scale[1] <= 1):
-            raise ValueError("This sequence of transformations only makes sense if the minimum scaling factor is <1 and the maximum scaling factor is >1.")
+            raise ValueError("This sequence of transformations only makes sense if the minimum scaling factor is <1 "
+                             "and the maximum scaling factor is >1.")
 
         self.n_trials_max = n_trials_max
         self.clip_boxes = clip_boxes

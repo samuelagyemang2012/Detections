@@ -57,9 +57,11 @@ img_height = 300  # Height of the model input images
 img_width = 300  # Width of the model input images
 img_channels = 3  # Number of color channels of the model input images
 mean_color = [123, 117,
-              104]  # The per-channel mean of the images in the dataset. Do not change this value if you're using any of the pre-trained weights.
+              104]  # The per-channel mean of the images in the dataset. Do not change this value if you're using any
+# of the pre-trained weights.
 swap_channels = [2, 1,
-                 0]  # The color channel order in the original SSD is BGR, so we'll have the model reverse the color channel order of the input images.
+                 0]  # The color channel order in the original SSD is BGR, so we'll have the model reverse the color
+# channel order of the input images.
 n_classes = 20  # Number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO
 scales_pascal = [0.1, 0.2, 0.37, 0.54, 0.71, 0.88,
                  1.05]  # The anchor box scaling factors used in the original SSD300 for the Pascal VOC datasets
@@ -75,7 +77,8 @@ aspect_ratios = [[1.0, 2.0, 0.5],
 two_boxes_for_ar1 = True
 steps = [8, 16, 32, 64, 100, 300]  # The space between two adjacent anchor box center points for each predictor layer.
 offsets = [0.5, 0.5, 0.5, 0.5, 0.5,
-           0.5]  # The offsets of the first anchor box center points from the top and left borders of the image as a fraction of the step size for each predictor layer.
+           0.5]  # The offsets of the first anchor box center points from the top and left borders of the image as a
+# fraction of the step size for each predictor layer.
 clip_boxes = False  # Whether or not to clip the anchor boxes to lie entirely within the image boundaries
 variances = [0.1, 0.1, 0.2,
              0.2]  # The variances by which the encoded target coordinates are divided as in the original implementation
@@ -137,7 +140,7 @@ model = ssd_300(image_size=(img_height, img_width, img_channels),
 # 2: Load some weights into the model.
 
 # TODO: Set the path to the weights you want to load.
-weights_path = 'path/to/VGG_ILSVRC_16_layers_fc_reduced.h5'
+weights_path = 'D:/Pycharm Projects/detection_models/VGG_ILSVRC_16_layers_fc_reduced.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -154,24 +157,27 @@ model.compile(optimizer=sgd, loss=ssd_loss.compute_loss)
 
 """### 2.2 Load a previously created model
 
-If you have previously created and saved a model and would now like to load it, execute the next code cell. The only thing you need to do here is to set the path to the saved model HDF5 file that you would like to load.
+If you have previously created and saved a model and would now like to load it, execute the next code cell. The only 
+thing you need to do here is to set the path to the saved model HDF5 file that you would like to load. 
 
-The SSD model contains custom objects: Neither the loss function nor the anchor box or L2-normalization layer types are contained in the Keras core library, so we need to provide them to the model loader.
+The SSD model contains custom objects: Neither the loss function nor the anchor box or L2-normalization layer types 
+are contained in the Keras core library, so we need to provide them to the model loader. 
 
-This next code cell assumes that you want to load a model that was created in 'training' mode. If you want to load a model that was created in 'inference' or 'inference_fast' mode, you'll have to add the `DecodeDetections` or `DecodeDetectionsFast` layer type to the `custom_objects` dictionary below.
-"""
+This next code cell assumes that you want to load a model that was created in 'training' mode. If you want to load a 
+model that was created in 'inference' or 'inference_fast' mode, you'll have to add the `DecodeDetections` or 
+`DecodeDetectionsFast` layer type to the `custom_objects` dictionary below. """
 
 # TODO: Set the path to the `.h5` file of the model to be loaded.
-model_path = 'path/to/trained/model.h5'
+# model_path = 'path/to/trained/model.h5'
 
 # We need to create an SSDLoss object in order to pass that to the model loader.
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 
-K.clear_session()  # Clear previous models from memory.
+# K.clear_session()  # Clear previous models from memory.
 
-model = load_model(model_path, custom_objects={'AnchorBoxes': AnchorBoxes,
-                                               'L2Normalization': L2Normalization,
-                                               'compute_loss': ssd_loss.compute_loss})
+# model = load_model(model_path, custom_objects={'AnchorBoxes': AnchorBoxes,
+#                                                'L2Normalization': L2Normalization,
+#                                                'compute_loss': ssd_loss.compute_loss})
 
 """## 3. Set up the data generators for the training
 
@@ -204,21 +210,16 @@ val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=Non
 # TODO: Set the paths to the datasets here.
 
 # The directories that contain the images.
-VOC_2007_images_dir = '../../datasets/VOCdevkit/VOC2007/JPEGImages/'
-VOC_2012_images_dir = '../../datasets/VOCdevkit/VOC2012/JPEGImages/'
+VOC_2007_images_dir = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/JPEGImages/"
 
 # The directories that contain the annotations.
-VOC_2007_annotations_dir = '../../datasets/VOCdevkit/VOC2007/Annotations/'
-VOC_2012_annotations_dir = '../../datasets/VOCdevkit/VOC2012/Annotations/'
+VOC_2007_annotations_dir = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/Annotations/"
 
 # The paths to the image sets.
-VOC_2007_train_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
-VOC_2012_train_image_set_filename = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/train.txt'
-VOC_2007_val_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/val.txt'
-VOC_2012_val_image_set_filename = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/val.txt'
-VOC_2007_trainval_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt'
-VOC_2012_trainval_image_set_filename = '../../datasets/VOCdevkit/VOC2012/ImageSets/Main/trainval.txt'
-VOC_2007_test_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/test.txt'
+VOC_2007_train_image_set_filename = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/train.txt"
+VOC_2007_val_image_set_filename = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/val.txt"
+VOC_2007_trainval_image_set_filename = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt"
+VOC_2007_test_image_set_filename = "D:/Datasets/VOCtest_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/test.txt"
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -228,18 +229,18 @@ classes = ['background',
            'horse', 'motorbike', 'person', 'pottedplant',
            'sheep', 'sofa', 'train', 'tvmonitor']
 
-train_dataset.parse_xml(images_dirs=[VOC_2007_images_dir,
-                                     VOC_2012_images_dir],
-                        image_set_filenames=[VOC_2007_trainval_image_set_filename,
-                                             VOC_2012_trainval_image_set_filename],
-                        annotations_dirs=[VOC_2007_annotations_dir,
-                                          VOC_2012_annotations_dir],
+train_dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
+                        # VOC_2012_images_dir],
+                        image_set_filenames=[VOC_2007_trainval_image_set_filename],
+                        # VOC_2012_trainval_image_set_filename],
+                        annotations_dirs=[VOC_2007_annotations_dir],
+                        # VOC_2012_annotations_dir],
                         classes=classes,
                         include_classes='all',
                         exclude_truncated=False,
                         exclude_difficult=False,
                         ret=False)
-
+print('nnn')
 val_dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
                       image_set_filenames=[VOC_2007_test_image_set_filename],
                       annotations_dirs=[VOC_2007_annotations_dir],
@@ -254,19 +255,21 @@ val_dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
 # option in the constructor, because in that cas the images are in memory already anyway. If you don't
 # want to create HDF5 datasets, comment out the subsequent two function calls.
 
-train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval.h5',
-                                  resize=False,
-                                  variable_image_size=True,
-                                  verbose=True)
-
-val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
-                                resize=False,
-                                variable_image_size=True,
-                                verbose=True)
+# TODO: uncomment
+# train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval.h5',
+#                                   resize=False,
+#                                   variable_image_size=True,
+#                                   verbose=True)
+# print('Vll')
+# val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
+#                                 resize=False,
+#                                 variable_image_size=True,
+#                                 verbose=True)
+##################################################################################################
 
 # 3: Set the batch size.
 
-batch_size = 32  # Change the batch size if you like, or if you run into GPU memory issues.
+batch_size = 8  # Change the batch size if you like, or if you run into GPU memory issues.
 
 # 4: Set the image transformations for pre-processing and data augmentation options.
 
@@ -353,14 +356,14 @@ def lr_schedule(epoch):
 # Define model callbacks.
 
 # TODO: Set the filepath under which you want to save the model.
-model_checkpoint = ModelCheckpoint(
-    filepath='ssd300_pascal_07+12_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
-    monitor='val_loss',
-    verbose=1,
-    save_best_only=True,
-    save_weights_only=False,
-    mode='auto',
-    period=1)
+# model_checkpoint = ModelCheckpoint(
+#     filepath='ssd300_pascal_07+12_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
+#     monitor='val_loss',
+#     verbose=1,
+#     save_best_only=True,
+#     save_weights_only=False,
+#     mode='auto',
+#     period=1)
 # model_checkpoint.best =
 
 csv_logger = CSVLogger(filename='ssd300_pascal_07+12_training_log.csv',
@@ -372,40 +375,59 @@ learning_rate_scheduler = LearningRateScheduler(schedule=lr_schedule,
 
 terminate_on_nan = TerminateOnNaN()
 
-callbacks = [model_checkpoint,
-             csv_logger,
-             learning_rate_scheduler,
-             terminate_on_nan]
+callbacks = [
+    # model_checkpoint,
+    csv_logger,
+    learning_rate_scheduler,
+    terminate_on_nan]
 
 """## 5. Train
 
-In order to reproduce the training of the "07+12" model mentioned above, at 1,000 training steps per epoch you'd have to train for 120 epochs. That is going to take really long though, so you might not want to do all 120 epochs in one go and instead train only for a few epochs at a time. You can find a summary of a full training [here](https://github.com/pierluigiferrari/ssd_keras/blob/master/training_summaries/ssd300_pascal_07%2B12_training_summary.md).
+In order to reproduce the training of the "07+12" model mentioned above, at 1,000 training steps per epoch you'd have 
+to train for 120 epochs. That is going to take really long though, so you might not want to do all 120 epochs in one 
+go and instead train only for a few epochs at a time. You can find a summary of a full training [here](
+https://github.com/pierluigiferrari/ssd_keras/blob/master/training_summaries/ssd300_pascal_07%2B12_training_summary
+.md). 
 
-In order to only run a partial training and resume smoothly later on, there are a few things you should note:
-1. Always load the full model if you can, rather than building a new model and loading previously saved weights into it. Optimizers like SGD or Adam keep running averages of past gradient moments internally. If you always save and load full models when resuming a training, then the state of the optimizer is maintained and the training picks up exactly where it left off. If you build a new model and load weights into it, the optimizer is being initialized from scratch, which, especially in the case of Adam, leads to small but unnecessary setbacks every time you resume the training with previously saved weights.
-2. In order for the learning rate scheduler callback above to work properly, `fit_generator()` needs to know which epoch we're in, otherwise it will start with epoch 0 every time you resume the training. Set `initial_epoch` to be the next epoch of your training. Note that this parameter is zero-based, i.e. the first epoch is epoch 0. If you had trained for 10 epochs previously and now you'd want to resume the training from there, you'd set `initial_epoch = 10` (since epoch 10 is the eleventh epoch). Furthermore, set `final_epoch` to the last epoch you want to run. To stick with the previous example, if you had trained for 10 epochs previously and now you'd want to train for another 10 epochs, you'd set `initial_epoch = 10` and `final_epoch = 20`.
-3. In order for the model checkpoint callback above to work correctly after a kernel restart, set `model_checkpoint.best` to the best validation loss from the previous training. If you don't do this and a new `ModelCheckpoint` object is created after a kernel restart, that object obviously won't know what the last best validation loss was, so it will always save the weights of the first epoch of your new training and record that loss as its new best loss. This isn't super-important, I just wanted to mention it.
-"""
+In order to only run a partial training and resume smoothly later on, there are a few things you should note: 1. 
+Always load the full model if you can, rather than building a new model and loading previously saved weights into it. 
+Optimizers like SGD or Adam keep running averages of past gradient moments internally. If you always save and load 
+full models when resuming a training, then the state of the optimizer is maintained and the training picks up exactly 
+where it left off. If you build a new model and load weights into it, the optimizer is being initialized from 
+scratch, which, especially in the case of Adam, leads to small but unnecessary setbacks every time you resume the 
+training with previously saved weights. 2. In order for the learning rate scheduler callback above to work properly, 
+`fit_generator()` needs to know which epoch we're in, otherwise it will start with epoch 0 every time you resume the 
+training. Set `initial_epoch` to be the next epoch of your training. Note that this parameter is zero-based, 
+i.e. the first epoch is epoch 0. If you had trained for 10 epochs previously and now you'd want to resume the 
+training from there, you'd set `initial_epoch = 10` (since epoch 10 is the eleventh epoch). Furthermore, 
+set `final_epoch` to the last epoch you want to run. To stick with the previous example, if you had trained for 10 
+epochs previously and now you'd want to train for another 10 epochs, you'd set `initial_epoch = 10` and `final_epoch 
+= 20`. 3. In order for the model checkpoint callback above to work correctly after a kernel restart, 
+set `model_checkpoint.best` to the best validation loss from the previous training. If you don't do this and a new 
+`ModelCheckpoint` object is created after a kernel restart, that object obviously won't know what the last best 
+validation loss was, so it will always save the weights of the first epoch of your new training and record that loss 
+as its new best loss. This isn't super-important, I just wanted to mention it. """
 
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
 initial_epoch = 0
-final_epoch = 120
-steps_per_epoch = 1000
+final_epoch = 10  # 120
+steps_per_epoch = 50 #1000
 
-history = model.fit_generator(generator=train_generator,
-                              steps_per_epoch=steps_per_epoch,
-                              epochs=final_epoch,
-                              callbacks=callbacks,
-                              validation_data=val_generator,
-                              validation_steps=ceil(val_dataset_size / batch_size),
-                              initial_epoch=initial_epoch)
+history = model.fit(train_generator,
+                    steps_per_epoch=ceil(train_dataset_size/batch_size),#steps_per_epoch,
+                    epochs=final_epoch,
+                    callbacks=callbacks,
+                    validation_data=val_generator,
+                    validation_steps=ceil(val_dataset_size / batch_size),
+                    initial_epoch=initial_epoch)
 
 """## 6. Make predictions
 
-Now let's make some predictions on the validation dataset with the trained model. For convenience we'll use the validation generator that we've already set up above. Feel free to change the batch size.
+Now let's make some predictions on the validation dataset with the trained model. For convenience we'll use the 
+validation generator that we've already set up above. Feel free to change the batch size. 
 
-You can set the `shuffle` option to `False` if you would like to check the model's progress on the same image(s) over the course of the training.
-"""
+You can set the `shuffle` option to `False` if you would like to check the model's progress on the same image(s) over 
+the course of the training. """
 
 # 1: Set the generator for the predictions.
 
@@ -454,7 +476,10 @@ y_pred_decoded = decode_detections(y_pred,
                                    img_height=img_height,
                                    img_width=img_width)
 
-"""We made the predictions on the resized images, but we'd like to visualize the outcome on the original input images, so we'll convert the coordinates accordingly. Don't worry about that opaque `apply_inverse_transforms()` function below, in this simple case it just aplies `(* original_image_size / resized_image_size)` to the box coordinates."""
+"""We made the predictions on the resized images, but we'd like to visualize the outcome on the original input 
+images, so we'll convert the coordinates accordingly. Don't worry about that opaque `apply_inverse_transforms()` 
+function below, in this simple case it just aplies `(* original_image_size / resized_image_size)` to the box 
+coordinates. """
 
 # 5: Convert the predictions for the original image.
 
@@ -465,7 +490,8 @@ print("Predicted boxes:\n")
 print('   class   conf xmin   ymin   xmax   ymax')
 print(y_pred_decoded_inv[i])
 
-"""Finally, let's draw the predicted boxes onto the image. Each predicted box says its confidence next to the category name. The ground truth boxes are also drawn onto the image in green for comparison."""
+"""Finally, let's draw the predicted boxes onto the image. Each predicted box says its confidence next to the 
+category name. The ground truth boxes are also drawn onto the image in green for comparison. """
 
 # 5: Draw the predicted boxes onto the image
 

@@ -175,13 +175,13 @@ class AnchorBoxes(Layer):
         if K.image_data_format() == 'channels_last':
             batch_size, feature_map_height, feature_map_width, feature_map_channels = x.shape
         else:  # Not yet relevant since TensorFlow is the only supported backend right now,
-                # but it can't harm to have this in here for the future
+            # but it can't harm to have this in here for the future
             batch_size, feature_map_channels, feature_map_height, feature_map_width = x.shape
 
         # Compute the grid of box center points. They are identical for all aspect ratios.
 
         # Compute the step sizes, i.e. how far apart the anchor box center points will be vertically and horizontally.
-        if (self.this_steps is None):
+        if self.this_steps is None:
             step_height = self.img_height / feature_map_height
             step_width = self.img_width / feature_map_width
         else:

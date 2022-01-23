@@ -56,9 +56,8 @@ As mentioned above, the parameters set below are not only needed to build the mo
 img_height = 300  # Height of the model input images
 img_width = 300  # Width of the model input images
 img_channels = 3  # Number of color channels of the model input images
-mean_color = [123, 117,
-              104]  # The per-channel mean of the images in the dataset. Do not change this value if you're using any
-# of the pre-trained weights.
+mean_color = [123, 117, 104]  # The per-channel mean of the images in the dataset. Do not change this value if
+# you're using any of the pre-trained weights.
 swap_channels = [2, 1,
                  0]  # The color channel order in the original SSD is BGR, so we'll have the model reverse the color
 # channel order of the input images.
@@ -210,6 +209,7 @@ val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=Non
 # TODO: Set the paths to the datasets here.
 
 # The directories that contain the images.
+# VOC_2007_images_dir = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/JPEGImages/"
 VOC_2007_images_dir = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/JPEGImages/"
 
 # The directories that contain the annotations.
@@ -217,17 +217,19 @@ VOC_2007_annotations_dir = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC200
 
 # The paths to the image sets.
 VOC_2007_train_image_set_filename = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/train.txt"
+
 VOC_2007_val_image_set_filename = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/val.txt"
 VOC_2007_trainval_image_set_filename = "D:/Datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt"
 VOC_2007_test_image_set_filename = "D:/Datasets/VOCtest_06-Nov-2007/VOCdevkit/VOC2007/ImageSets/Main/test.txt"
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
-classes = ['background',
-           'aeroplane', 'bicycle', 'bird', 'boat',
-           'bottle', 'bus', 'car', 'cat',
-           'chair', 'cow', 'diningtable', 'dog',
-           'horse', 'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor']
+# classes = ['background',
+#            'aeroplane', 'bicycle', 'bird', 'boat',
+#            'bottle', 'bus', 'car', 'cat',
+#            'chair', 'cow', 'diningtable', 'dog',
+#            'horse', 'motorbike', 'person', 'pottedplant',
+#            'sheep', 'sofa', 'train', 'tvmonitor']
+classes = ['bird', 'dog', 'car']
 
 train_dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
                         # VOC_2012_images_dir],
@@ -411,10 +413,10 @@ as its new best loss. This isn't super-important, I just wanted to mention it. "
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
 initial_epoch = 0
 final_epoch = 10  # 120
-steps_per_epoch = 50 #1000
+steps_per_epoch = 50  # 1000
 
 history = model.fit(train_generator,
-                    steps_per_epoch=ceil(train_dataset_size/batch_size),#steps_per_epoch,
+                    steps_per_epoch=ceil(train_dataset_size / batch_size),  # steps_per_epoch,
                     epochs=final_epoch,
                     callbacks=callbacks,
                     validation_data=val_generator,
@@ -461,10 +463,18 @@ y_pred = model.predict(batch_images)
 
 """Now let's decode the raw predictions in `y_pred`.
 
-Had we created the model in 'inference' or 'inference_fast' mode, then the model's final layer would be a `DecodeDetections` layer and `y_pred` would already contain the decoded predictions, but since we created the model in 'training' mode, the model outputs raw predictions that still need to be decoded and filtered. This is what the `decode_detections()` function is for. It does exactly what the `DecodeDetections` layer would do, but using Numpy instead of TensorFlow (i.e. on the CPU instead of the GPU).
+Had we created the model in 'inference' or 'inference_fast' mode, then the model's final layer would be a 
+`DecodeDetections` layer and `y_pred` would already contain the decoded predictions, but since we created the model 
+in 'training' mode, the model outputs raw predictions that still need to be decoded and filtered. This is what the 
+`decode_detections()` function is for. It does exactly what the `DecodeDetections` layer would do, but using Numpy 
+instead of TensorFlow (i.e. on the CPU instead of the GPU). 
 
-`decode_detections()` with default argument values follows the procedure of the original SSD implementation: First, a very low confidence threshold of 0.01 is applied to filter out the majority of the predicted boxes, then greedy non-maximum suppression is performed per class with an intersection-over-union threshold of 0.45, and out of what is left after that, the top 200 highest confidence boxes are returned. Those settings are for precision-recall scoring purposes though. In order to get some usable final predictions, we'll set the confidence threshold much higher, e.g. to 0.5, since we're only interested in the very confident predictions.
-"""
+`decode_detections()` with default argument values follows the procedure of the original SSD implementation: First, 
+a very low confidence threshold of 0.01 is applied to filter out the majority of the predicted boxes, then greedy 
+non-maximum suppression is performed per class with an intersection-over-union threshold of 0.45, and out of what is 
+left after that, the top 200 highest confidence boxes are returned. Those settings are for precision-recall scoring 
+purposes though. In order to get some usable final predictions, we'll set the confidence threshold much higher, 
+e.g. to 0.5, since we're only interested in the very confident predictions. """
 
 # 4: Decode the raw predictions in `y_pred`.
 

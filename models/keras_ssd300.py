@@ -183,11 +183,13 @@ def ssd_300(image_size,
 
     if aspect_ratios_global is None and aspect_ratios_per_layer is None:
         raise ValueError(
-            "`aspect_ratios_global` and `aspect_ratios_per_layer` cannot both be None. At least one needs to be specified.")
+            "`aspect_ratios_global` and `aspect_ratios_per_layer` cannot both be None. At least one needs to be "
+            "specified.")
     if aspect_ratios_per_layer:
         if len(aspect_ratios_per_layer) != n_predictor_layers:
             raise ValueError(
-                "It must be either aspect_ratios_per_layer is None or len(aspect_ratios_per_layer) == {}, but len(aspect_ratios_per_layer) == {}.".format(
+                "It must be either aspect_ratios_per_layer is None or len(aspect_ratios_per_layer) == {}, "
+                "but len(aspect_ratios_per_layer) == {}.".format(
                     n_predictor_layers, len(aspect_ratios_per_layer)))
 
     if (min_scale is None or max_scale is None) and scales is None:
@@ -196,11 +198,12 @@ def ssd_300(image_size,
         if len(scales) != n_predictor_layers + 1:
             raise ValueError("It must be either scales is None or len(scales) == {}, but len(scales) == {}.".format(
                 n_predictor_layers + 1, len(scales)))
-    else:  # If no explicit list of scaling factors was passed, compute the list of scaling factors from `min_scale` and `max_scale`
+    else:  # If no explicit list of scaling factors was passed, compute the list of scaling factors from `min_scale`
+        # and `max_scale`
         scales = np.linspace(min_scale, max_scale, n_predictor_layers + 1)
 
     if len(variances) != 4:
-        raise ValueError("4 variance values must be pased, but {} values were received.".format(len(variances)))
+        raise ValueError("4 variance values must be passed, but {} values were received.".format(len(variances)))
     variances = np.array(variances)
     if np.any(variances <= 0):
         raise ValueError("All variances must be >0, but the variances given are {}".format(variances))
@@ -382,7 +385,8 @@ def ssd_300(image_size,
     conv9_2_mbox_loc = Conv2D(n_boxes[5] * 4, (3, 3), padding='same', kernel_initializer='he_normal',
                               kernel_regularizer=l2(l2_reg), name='conv9_2_mbox_loc')(conv9_2)
 
-    ### Generate the anchor boxes (called "priors" in the original Caffe/C++ implementation, so I'll keep their layer names)
+    # Generate the anchor boxes (called "priors" in the original Caffe/C++ implementation, so I'll keep their
+    # layer names)
 
     # Output shape of anchors: `(batch, height, width, n_boxes, 8)`
     conv4_3_norm_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[0], next_scale=scales[1],

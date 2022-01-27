@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.callbacks import EarlyStopping, TerminateOnNaN, CSVLogger, LearningRateScheduler
+from tensorflow.keras.callbacks import EarlyStopping, TerminateOnNaN, CSVLogger, LearningRateScheduler, ModelCheckpoint
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import load_model
 from math import ceil
@@ -16,6 +16,9 @@ from data_generator.data_augmentation_chain_original_ssd import SSDDataAugmentat
 from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channels
 from data_generator.object_detection_2d_geometric_ops import Resize
 from data_generator.object_detection_2d_misc_utils import apply_inverse_transforms
+from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
+from keras_layers.keras_layer_L2Normalization import L2Normalization
+from keras_loss_function.keras_ssd_loss import SSDLoss
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -24,9 +27,9 @@ sess = tf.compat.v1.Session(config=config)
 
 # Hyper-parameters
 img_height = 300
-img_width = 300
+img_width = 480
 img_channels = 3
-n_classes = 3
+n_classes = 5
 mode = 'training'
 l2_regularization = 0.0005
 scales = [0.1, 0.2, 0.37, 0.54, 0.71, 0.88, 1.05]
@@ -48,27 +51,32 @@ swap_channels = [2, 1, 0]
 K.clear_session()
 
 # build ssd_300 model
-model = ssd_300(image_size=(img_height, img_width, img_channels),
-                n_classes=n_classes,
-                mode='training',
-                l2_regularization=l2_regularization,
-                scales=scales,
-                aspect_ratios_per_layer=aspect_ratios_per_layer,
-                two_boxes_for_ar1=two_boxes_for_ar1,
-                steps=steps,
-                offsets=offsets,
-                clip_boxes=clip_boxes,
-                variances=variances,
-                normalize_coords=normalize_coords,
-                subtract_mean=subtract_mean,
-                swap_channels=swap_channels)
+# model = ssd_300(image_size=(img_height, img_width, img_channels),
+#                 n_classes=n_classes,
+#                 mode='training',
+#                 l2_regularization=l2_regularization,
+#                 scales=scales,
+#                 aspect_ratios_per_layer=aspect_ratios_per_layer,
+#                 two_boxes_for_ar1=two_boxes_for_ar1,
+#                 steps=steps,
+#                 offsets=offsets,
+#                 clip_boxes=clip_boxes,
+#                 variances=variances,
+#                 normalize_coords=normalize_coords,
+#                 subtract_mean=subtract_mean,
+#                 swap_channels=swap_channels)
+#
+# # Load weights: optional
+# weights_path = "C:/Users/Administrator/Desktop/datasets/trained_models/VGG_ILSVRC_16_layers_fc_reduced.h5"
 
-# Load weights: optional
-weights_path = "D:/Pycharm Projects/detection_models/VGG_ILSVRC_16_layers_fc_reduced.h5"
-model.load_weights(weights_path, by_name=True)
-
-adam = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
+model_path = "./saved_models/final_model.h5"
+model = load_model(model_path, custom_objects={'AnchorBoxes': AnchorBoxes,
+                                               'L2Normalization': L2Normalization,
+                                               'compute_loss': ssd_loss.compute_loss})
+
+# model.load_weights(weights_path, by_name=True)
+adam = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 # Load data
@@ -76,9 +84,9 @@ train_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=N
 val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
 
 # Data path
-images_dir = 'D:/Datasets/my_coco/all/resized/images/'
-train_labels_filename = 'D:/Datasets/my_coco/all/resized/detection_split/train.csv'
-val_labels_filename = 'D:/Datasets/my_coco/all/resized/detection_split/val.csv'
+images_dir = 'C:/Users/Administrator/Desktop/Self Driving Cars/images'
+train_labels_filename = 'C:/Users/Administrator/Desktop/Self Driving Cars/lights_peds/train_subset.csv'
+val_labels_filename = 'C:/Users/Administrator/Desktop/Self Driving Cars/lights_peds/val_subset.csv'
 
 # Load Data
 train_dataset.parse_csv(images_dir=images_dir,
@@ -92,7 +100,7 @@ val_dataset.parse_csv(images_dir=images_dir,
                       include_classes='all')
 
 # Data augmentation
-batch_size = 2
+batch_size = 4
 
 # data_augmentation_chain = DataAugmentationConstantInputSize(random_brightness=(-48, 48, 0.5),
 #                                                             random_contrast=(0.5, 1.8, 0.5),
@@ -176,14 +184,13 @@ def lr_schedule(epoch):
         return 0.00001
 
 
-# model_checkpoint = ModelCheckpoint(filepath='ssd7_weights.h5',
-#                                    monitor='val_loss',
-#                                    verbose=1,
-#                                    save_best_only=True,
-#                                    save_weights_only=False,
-#                                    mode='auto',
-#                                    period=1)
-
+model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights.h5',
+                                   monitor='val_loss',
+                                   verbose=1,
+                                   save_best_only=True,
+                                   save_weights_only=False,
+                                   mode='auto',
+                                   period=1)
 
 early_stopping = EarlyStopping(monitor='val_loss',
                                min_delta=0.0,
@@ -204,14 +211,14 @@ terminate_on_nan = TerminateOnNaN()
 #                                          min_lr=0.00001)
 
 callbacks = [
-    # model_checkpoint,
+    model_checkpoint,
     early_stopping,
     terminate_on_nan,
     learning_rate_scheduler]
 
 # Train
-initial_epoch = 0
-final_epoch = 100
+initial_epoch = 100
+final_epoch = 150  # 100
 steps_per_epoch = 1000
 
 history = model.fit_generator(generator=train_generator,
@@ -226,12 +233,13 @@ history = model.fit_generator(generator=train_generator,
 # plt.plot(history.history['loss'], label='loss')
 # plt.plot(history.history['val_loss'], label='val_loss')
 # plt.legend(loc='upper right', prop={'size': 24})
-model.save('model.h5')
 
+model.save('./saved_models/final_model.h5')
+print("training complete. model saved")
 # ##################################################################################################################
 
 # Prediction
-predict_generator = val_dataset.generate(batch_size=1,
+predict_generator = val_dataset.generate(batch_size=2,
                                          shuffle=True,
                                          transformations=[convert_to_3_channels, resize],
                                          label_encoder=None,
@@ -269,13 +277,13 @@ print("Predicted boxes:\n")
 print('   class   conf xmin   ymin   xmax   ymax')
 print(y_pred_decoded_inv[i])
 
-plt.figure(figsize=(20, 12))
+# plt.figure(figsize=(20, 12))
 plt.imshow(batch_images[i])
 
 # Draw the predicted boxes onto the image
 colors = plt.cm.hsv(np.linspace(0, 1, n_classes + 1)).tolist()
-classes = ['background', 'bird', 'dog', 'car']
-plt.figure(figsize=(20, 12))
+classes = ['background', 'car', 'truck', 'pedestrian', 'bicyclist', 'light']
+# plt.figure(figsize=(20, 12))
 plt.imshow(batch_original_images[i])
 
 current_axis = plt.gca()
@@ -300,4 +308,4 @@ for box in y_pred_decoded_inv[i]:
     current_axis.add_patch(plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color=color, fill=False, linewidth=2))
     current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor': color, 'alpha': 1.0})
 
-plt.savefig("detections.jpg", bbox_inches='tight')
+plt.savefig("./examples/detections.jpg", bbox_inches='tight')

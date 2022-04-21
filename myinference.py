@@ -15,15 +15,15 @@ from ssd_encoder_decoder.ssd_output_decoder import decode_detections
 
 img_height = 300
 img_width = 480
-confidence_threshold = 0.5
+confidence_threshold = 0.4
 classes = ['background', 'car', 'truck', 'pedestrian', 'bicyclist', 'light']
 
-model_path = 'C:/Users/Administrator/Desktop/ssd_keras/saved_models/final_model.h5'
-base_path = "C:/Users/Administrator/Desktop/"  # "C:/Users/Administrator/Desktop/Self Driving Cars/images/"
-dest_path = "C:/Users/Administrator/Desktop/ssd_keras/my_detections/"
+model_path = "C:/Users/Administrator/Desktop/final_model.h5"
+base_path = "C:/Users/Administrator/Desktop/my_test/"  # "C:/Users/Administrator/Desktop/Self Driving Cars/images/"
+dest_path = "C:/Users/Administrator/Desktop/detections/ssd/"
 
-# images_list = os.listdir(base_path)  # ["Capture.JPG"]
-images_list = ["a1.jpg", "a2.jpg", "a3.jpg", "a4.jpg", "a5.jpg", "a6.jpg", "a7.jpeg"]
+images_list = os.listdir(base_path)  # ["Capture.JPG"]
+# images_list = ["a1.jpg", "a2.jpg", "a3.jpg", "a4.jpg", "a5.jpg", "a6.jpg", "a7.jpeg"]
 
 # images_list = images_list[300:500]
 K.clear_session()

@@ -51,31 +51,35 @@ swap_channels = [2, 1, 0]
 K.clear_session()
 
 # build ssd_300 model
-# model = ssd_300(image_size=(img_height, img_width, img_channels),
-#                 n_classes=n_classes,
-#                 mode='training',
-#                 l2_regularization=l2_regularization,
-#                 scales=scales,
-#                 aspect_ratios_per_layer=aspect_ratios_per_layer,
-#                 two_boxes_for_ar1=two_boxes_for_ar1,
-#                 steps=steps,
-#                 offsets=offsets,
-#                 clip_boxes=clip_boxes,
-#                 variances=variances,
-#                 normalize_coords=normalize_coords,
-#                 subtract_mean=subtract_mean,
-#                 swap_channels=swap_channels)
-#
+model = ssd_300(image_size=(img_height, img_width, img_channels),
+                n_classes=n_classes,
+                mode='training',
+                l2_regularization=l2_regularization,
+                scales=scales,
+                aspect_ratios_per_layer=aspect_ratios_per_layer,
+                two_boxes_for_ar1=two_boxes_for_ar1,
+                steps=steps,
+                offsets=offsets,
+                clip_boxes=clip_boxes,
+                variances=variances,
+                normalize_coords=normalize_coords,
+                subtract_mean=subtract_mean,
+                swap_channels=swap_channels)
+
 # # Load weights: optional
 # weights_path = "C:/Users/Administrator/Desktop/datasets/trained_models/VGG_ILSVRC_16_layers_fc_reduced.h5"
 
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
-model_path = "./saved_models/final_model.h5"
-model = load_model(model_path, custom_objects={'AnchorBoxes': AnchorBoxes,
-                                               'L2Normalization': L2Normalization,
-                                               'compute_loss': ssd_loss.compute_loss})
 
+
+# model_path = "./saved_models/final_model.h5"
+# model = load_model(model_path, custom_objects={'AnchorBoxes': AnchorBoxes,
+#                                                'L2Normalization': L2Normalization,
+#
+#                                                'compute_loss': ssd_loss.compute_loss})
+# or load weights
 # model.load_weights(weights_path, by_name=True)
+
 adam = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 

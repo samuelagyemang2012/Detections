@@ -17,7 +17,7 @@ Below are some prediction examples of the fully trained original SSD300 model.
 | ![img01](./examples/1478020998721490820.jpg)| ![img01](./examples/1478021584075204499.jpg) |
 | ![img01](./examples/a6.jpg) | ![img01](./examples/a3.jpg) |
 | ![img01](./examples/a1.jpg) | ![img01](./examples/Capture.PNG) |
-| ![img01](./examples/a7.jpeg) | ![img01](./examples/Screenshot 2022-04-24 192939.png) |
+| ![img01](./examples/a7.jpeg) | ![img01](./examples/dublin.png) |
 | ![img01](./examples/6.png) | ![img01](./examples/48.png) |
 ### Dependencies
 

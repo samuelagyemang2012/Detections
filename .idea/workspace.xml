@@ -2,59 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/examples/1.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478020998721490820.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478021584075204499.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478021603076466949.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478731891987209643.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478731938439228892.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478732057724477245.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/1478732154069932560.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Capture.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/Screenshot 2022-04-24 192939.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/misc_utils/inference_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ssd_keras.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ssd_keras.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/detections.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/fish-bike.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/fish_bike.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_06.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_07.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_08.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd300_pascalVOC_pred_09.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd7_udacity_traffic_pred_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd7_udacity_traffic_pred_02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd7_udacity_traffic_pred_03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd7_udacity_traffic_pred_04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/ssd7_udacity_traffic_pred_05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_01_no_gt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_02_no_gt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_03_no_gt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_04_no_gt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_05_no_gt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/trained_ssd300_pascalVOC2007_test_pred_06.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_detections/a1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/a1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_detections/a3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/a3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_detections/a4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/a4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_detections/a5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/a5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_detections/a6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/a6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_detections/a7.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/a7.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myinference.py" beforeDir="false" afterPath="$PROJECT_DIR$/myinference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myssd300_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_inference.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

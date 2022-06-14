@@ -19,7 +19,7 @@ limitations under the License.
 from __future__ import division
 import numpy as np
 from keras.models import Model
-from keras.layers import Input, Lambda, Activation, Conv2D, MaxPooling2D, ZeroPadding2D, Reshape, Concatenate
+from keras.layers import Input, Lambda, Activation, Conv2D, MaxPooling2D, ZeroPadding2D, Reshape, Concatenate, Add
 from keras.regularizers import l2
 import keras.backend as K
 
@@ -29,35 +29,35 @@ from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 
 
-def ssd_300(image_size,
-            n_classes,
-            mode='training',
-            l2_regularization=0.0005,
-            min_scale=None,
-            max_scale=None,
-            scales=None,
-            aspect_ratios_global=None,
-            aspect_ratios_per_layer=[[1.0, 2.0, 0.5],
-                                     [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                     [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                     [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                     [1.0, 2.0, 0.5],
-                                     [1.0, 2.0, 0.5]],
-            two_boxes_for_ar1=True,
-            steps=[8, 16, 32, 64, 100, 300],
-            offsets=None,
-            clip_boxes=False,
-            variances=[0.1, 0.1, 0.2, 0.2],
-            coords='centroids',
-            normalize_coords=True,
-            subtract_mean=[123, 117, 104],
-            divide_by_stddev=None,
-            swap_channels=[2, 1, 0],
-            confidence_thresh=0.01,
-            iou_threshold=0.45,
-            top_k=200,
-            nms_max_output_size=400,
-            return_predictor_sizes=False):
+def multi_ssd_300(image_size,
+                  n_classes,
+                  mode='training',
+                  l2_regularization=0.0005,
+                  min_scale=None,
+                  max_scale=None,
+                  scales=None,
+                  aspect_ratios_global=None,
+                  aspect_ratios_per_layer=[[1.0, 2.0, 0.5],
+                                           [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
+                                           [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
+                                           [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
+                                           [1.0, 2.0, 0.5],
+                                           [1.0, 2.0, 0.5]],
+                  two_boxes_for_ar1=True,
+                  steps=[8, 16, 32, 64, 100, 300],
+                  offsets=None,
+                  clip_boxes=False,
+                  variances=[0.1, 0.1, 0.2, 0.2],
+                  coords='centroids',
+                  normalize_coords=True,
+                  subtract_mean=[123, 117, 104],
+                  divide_by_stddev=None,
+                  swap_channels=[2, 1, 0],
+                  confidence_thresh=0.01,
+                  iou_threshold=0.45,
+                  top_k=200,
+                  nms_max_output_size=400,
+                  return_predictor_sizes=False):
     '''
     Build a Keras model with SSD300 architecture, see references.
 
@@ -175,6 +175,7 @@ def ssd_300(image_size,
     n_predictor_layers = 6  # The number of predictor conv layers in the network is 6 for the original SSD300.
     n_classes += 1  # Account for the background class.
     l2_reg = l2_regularization  # Make the internal name shorter.
+
     img_height, img_width, img_channels = image_size[0], image_size[1], image_size[2]
 
     ############################################################################
@@ -272,59 +273,114 @@ def ssd_300(image_size,
     ############################################################################
 
     x = Input(shape=(img_height, img_width, img_channels))
+    x_2 = Input(shape=(img_height, img_width, img_channels))
 
     # The following identity layer is only needed so that the subsequent lambda layers can be optional.
-    x1 = Lambda(identity_layer, output_shape=(img_height, img_width, img_channels), name='identity_layer')(x)
+    x1 = Lambda(identity_layer, output_shape=(img_height, img_width, img_channels), name='identity_layer1')(x)
+    x1_2 = Lambda(identity_layer, output_shape=(img_height, img_width, img_channels), name='identity_layer2')(x_2)
+
     if not (subtract_mean is None):
         x1 = Lambda(input_mean_normalization, output_shape=(img_height, img_width, img_channels),
-                    name='input_mean_normalization')(x1)
+                    name='input_mean_normalization1')(x1)
+        x1_2 = Lambda(input_mean_normalization, output_shape=(img_height, img_width, img_channels),
+                      name='input_mean_normalization2')(x_2)
     if not (divide_by_stddev is None):
         x1 = Lambda(input_stddev_normalization, output_shape=(img_height, img_width, img_channels),
-                    name='input_stddev_normalization')(x1)
+                    name='input_stddev_normalization1')(x1)
+        x1_2 = Lambda(input_stddev_normalization, output_shape=(img_height, img_width, img_channels),
+                      name='input_stddev_normalization2')(x_2)
     if swap_channels:
         x1 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels), name='input_channel_swap')(
             x1)
+        x1_2 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels),
+                      name='input_channel_swap')(x_2)
 
     conv1_1 = Conv2D(64, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv1_1')(x1)
+    conv1_1_2 = Conv2D(64, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv1_1_2')(x1_2)
+
     conv1_2 = Conv2D(64, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv1_2')(conv1_1)
+    conv1_2_2 = Conv2D(64, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv1_2_2')(conv1_1_2)
+
     pool1 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool1')(conv1_2)
+    pool1_2 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool1_2')(conv1_2_2)
 
     conv2_1 = Conv2D(128, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv2_1')(pool1)
+    conv2_1_2 = Conv2D(128, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv2_1_2')(pool1_2)
+
     conv2_2 = Conv2D(128, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv2_2')(conv2_1)
+    conv2_2_2 = Conv2D(128, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv2_2_2')(conv2_1_2)
+
     pool2 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool2')(conv2_2)
+    pool2_2 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool2_2')(conv2_2_2)
 
     conv3_1 = Conv2D(256, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv3_1')(pool2)
+    conv3_1_2 = Conv2D(256, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv3_1_2')(pool2_2)
+
     conv3_2 = Conv2D(256, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv3_2')(conv3_1)
+    conv3_2_2 = Conv2D(256, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv3_2_2')(conv3_1_2)
+
     conv3_3 = Conv2D(256, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv3_3')(conv3_2)
+    conv3_3_2 = Conv2D(256, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv3_3_2')(conv3_2_2)
+
     pool3 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool3')(conv3_3)
+    pool3_2 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool3_2')(conv3_3_2)
 
     conv4_1 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv4_1')(pool3)
+    conv4_1_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv4_1_2')(pool3_2)
+
     conv4_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv4_2')(conv4_1)
+    conv4_2_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv4_2_2')(conv4_1_2)
+
     conv4_3 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv4_3')(conv4_2)
+    conv4_3_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv4_3_2')(conv4_2_2)
+
     pool4 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool4')(conv4_3)
+    pool4_2 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same', name='pool4_2')(conv4_3_2)
 
     conv5_1 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv5_1')(pool4)
+    conv5_1_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv5_1_2')(pool4_2)
+
     conv5_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv5_2')(conv5_1)
+    conv5_2_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv5_2_2')(conv5_1_2)
+
     conv5_3 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv5_3')(conv5_2)
+    conv5_3_2 = Conv2D(512, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
+                       kernel_regularizer=l2(l2_reg), name='conv5_3_2')(conv5_2_2)
+
     pool5 = MaxPooling2D(pool_size=(3, 3), strides=(1, 1), padding='same', name='pool5')(conv5_3)
+    pool5_2 = MaxPooling2D(pool_size=(3, 3), strides=(1, 1), padding='same', name='pool5_2')(conv5_3_2)
+
+    concat = Add()([pool5, pool5_2])
 
     #############################################################################################################
 
     fc6 = Conv2D(1024, (3, 3), dilation_rate=(6, 6), activation='relu', padding='same', kernel_initializer='he_normal',
-                 kernel_regularizer=l2(l2_reg), name='fc6')(pool5)
+                 kernel_regularizer=l2(l2_reg), name='fc6')(concat)
 
     fc7 = Conv2D(1024, (1, 1), activation='relu', padding='same', kernel_initializer='he_normal',
                  kernel_regularizer=l2(l2_reg), name='fc7')(fc6)

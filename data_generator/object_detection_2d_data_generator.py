@@ -167,7 +167,8 @@ class DataGenerator:
                         raise ValueError("`filenames_type` can be either 'text' or 'pickle'.")
             else:
                 raise ValueError(
-                    "`filenames` must be either a Python list/tuple or a string representing a filepath (to a pickled or text file). The value you passed is neither of the two.")
+                    "`filenames` must be either a Python list/tuple or a string representing a filepath (to a pickled"
+                    " or text file). The value you passed is neither of the two.")
             self.dataset_size = len(self.filenames)
             self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
             if load_images_into_memory:
@@ -192,7 +193,8 @@ class DataGenerator:
                 self.labels = labels
             else:
                 raise ValueError(
-                    "`labels` must be either a Python list/tuple or a string representing the path to a pickled file containing a list/tuple. The value you passed is neither of the two.")
+                    "`labels` must be either a Python list/tuple or a string representing the path to a pickled file"
+                    " containing a list/tuple. The value you passed is neither of the two.")
         else:
             self.labels = None
 
@@ -204,7 +206,8 @@ class DataGenerator:
                 self.image_ids = image_ids
             else:
                 raise ValueError(
-                    "`image_ids` must be either a Python list/tuple or a string representing the path to a pickled file containing a list/tuple. The value you passed is neither of the two.")
+                    "`image_ids` must be either a Python list/tuple or a string representing the path to a pickled file"
+                    " containing a list/tuple. The value you passed is neither of the two.")
         else:
             self.image_ids = None
 
@@ -216,7 +219,8 @@ class DataGenerator:
                 self.eval_neutral = eval_neutral
             else:
                 raise ValueError(
-                    "`image_ids` must be either a Python list/tuple or a string representing the path to a pickled file containing a list/tuple. The value you passed is neither of the two.")
+                    "`image_ids` must be either a Python list/tuple or a string representing the path to a pickled file"
+                    " containing a list/tuple. The value you passed is neither of the two.")
         else:
             self.eval_neutral = None
 

@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/video_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_inference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_test.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_train.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_valid.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/self_driving_cars_train.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/self_driving_cars_val.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/multi_keras_ssd300.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myssd300_multi_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_generator/object_detection_2d_data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_generator/object_detection_2d_data_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/detections.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/examples/detections.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/keras_ssd300.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/keras_ssd300.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myinference.py" beforeDir="false" afterPath="$PROJECT_DIR$/myinference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myssd300_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,11 +40,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\Projects\ssd_keras\data" />
       <recent name="C:\Users\Administrator\Desktop\ssd_keras\my_detections" />
       <recent name="D:\Pycharm Projects\ssd_keras" />
     </key>
@@ -40,7 +55,7 @@
       <recent name="D:\Pycharm Projects\ssd_keras\notebooks" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.video_inference">
+  <component name="RunManager" selected="Python.myinference">
     <configuration name="myinference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ssd_keras" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,9 +163,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.video_inference" />
         <item itemvalue="Python.myinference" />
         <item itemvalue="Python.myssd300_training" />
+        <item itemvalue="Python.video_inference" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.ssd300_training" />
       </list>

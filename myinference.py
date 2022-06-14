@@ -1,10 +1,12 @@
 import os
 import cv2
+import pandas as pd
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from imageio import imread
 import numpy as np
+import pandas
 from matplotlib import pyplot as plt
 from keras_loss_function.keras_ssd_loss import SSDLoss
 from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
@@ -12,21 +14,13 @@ from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_L2Normalization import L2Normalization
 from keras_loss_function.keras_ssd_loss import SSDLoss
 from ssd_encoder_decoder.ssd_output_decoder import decode_detections
+from tqdm import tqdm
 
-img_height = 300
-img_width = 480
-confidence_threshold = 0.4
-classes = ['background', 'car', 'truck', 'pedestrian', 'bicyclist', 'light']
 
-model_path = "C:/Users/Administrator/Desktop/final_model.h5"
-base_path = "C:/Users/Administrator/Desktop/my_test/"  # "C:/Users/Administrator/Desktop/Self Driving Cars/images/"
-dest_path = "C:/Users/Administrator/Desktop/detections/ssd/"
-
-images_list = os.listdir(base_path)  # ["Capture.JPG"]
-# images_list = ["a1.jpg", "a2.jpg", "a3.jpg", "a4.jpg", "a5.jpg", "a6.jpg", "a7.jpeg"]
-
-# images_list = images_list[300:500]
-K.clear_session()
+def list_from_csv(csv_path, image_column):
+    df = pd.read_csv(csv_path)
+    images = df[image_column].tolist()
+    return images
 
 
 def load_det_model(model_path_):
@@ -42,7 +36,7 @@ def do_detections(images_list_, image_base_path_, model_):
     orig_images = []  # Store the images here.
     resize_images = []
 
-    for i in images_list_:
+    for i in tqdm(images_list_):
         img_ = imread(image_base_path_ + i)
         orig_images.append([img_.shape[0], img_.shape[1]])
         img = image.load_img(image_base_path_ + i, target_size=(img_height, img_width))
@@ -109,7 +103,24 @@ def show_detections(detections_, image_list, image_base, class_names, dest_path_
         plt.savefig(dest_path_ + name, dpi=100, bbox_inches="tight")
 
 
+img_height = 448
+img_width = 448
+confidence_threshold = 0.4
+# classes = ['background', 'car', 'truck', 'pedestrian', 'bicyclist', 'light']
+classes = ['background', 'car', 'cyclist', 'pedestrian']
+
+model_path = "saved_models/cruw_model.h5"
+base_path = 'C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/images/'  # "C:/Users/Administrator/Desktop/my_test/"  # "C:/Users/Administrator/Desktop/Self Driving Cars/images/"
+dest_path = "C:/Users/Administrator/Desktop/my_detections/cruw/"
+csv_path = "C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/cruw_test.csv"
+
+# images_list = os.listdir(base_path)  # ["Capture.JPG"]
+# images_list = ["a1.jpg", "a2.jpg", "a3.jpg", "a4.jpg", "a5.jpg", "a6.jpg", "a7.jpeg"]
+image_list = list_from_csv(csv_path, 'image')
+image_list = image_list[0:40]
+K.clear_session()
+
 model = load_det_model(model_path)
-detections, orig_sizes = do_detections(images_list, base_path, model)
+detections, orig_sizes = do_detections(image_list, base_path, model)
 print_detections(detections)
-show_detections(detections, images_list, base_path, classes, dest_path)
+show_detections(detections, image_list, base_path, classes, dest_path)

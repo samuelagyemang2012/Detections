@@ -7,7 +7,7 @@ from math import ceil
 import numpy as np
 from matplotlib import pyplot as plt
 from tensorflow.python.keras.callbacks import LearningRateScheduler
-from models.keras_ssd300 import ssd_300
+from models.multi_keras_ssd300 import multi_ssd_300
 from keras_loss_function.keras_ssd_loss import SSDLoss
 from ssd_encoder_decoder.ssd_input_encoder import SSDInputEncoder
 from ssd_encoder_decoder.ssd_output_decoder import decode_detections, decode_detections_fast
@@ -51,23 +51,23 @@ swap_channels = [0, 1, 2]  # [2, 1, 0]
 K.clear_session()
 
 # build ssd_300 model - for new mode
-model = ssd_300(image_size=(img_height, img_width, img_channels),
-                n_classes=n_classes,
-                mode='training',
-                l2_regularization=l2_regularization,
-                scales=scales,
-                aspect_ratios_per_layer=aspect_ratios_per_layer,
-                two_boxes_for_ar1=two_boxes_for_ar1,
-                steps=steps,
-                offsets=offsets,
-                clip_boxes=clip_boxes,
-                variances=variances,
-                normalize_coords=normalize_coords,
-                subtract_mean=subtract_mean,
-                swap_channels=swap_channels)
+model = multi_ssd_300(image_size=(img_height, img_width, img_channels),
+                      n_classes=n_classes,
+                      mode='training',
+                      l2_regularization=l2_regularization,
+                      scales=scales,
+                      aspect_ratios_per_layer=aspect_ratios_per_layer,
+                      two_boxes_for_ar1=two_boxes_for_ar1,
+                      steps=steps,
+                      offsets=offsets,
+                      clip_boxes=clip_boxes,
+                      variances=variances,
+                      normalize_coords=normalize_coords,
+                      subtract_mean=subtract_mean,
+                      swap_channels=swap_channels)
 
 # Load weights: optional
-weights_path = "C:/Users/Administrator/Desktop/datasets/trained_models/VGG_ILSVRC_16_layers_fc_reduced.h5"
+# weights_path = "C:/Users/Administrator/Desktop/datasets/trained_models/VGG_ILSVRC_16_layers_fc_reduced.h5"
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 
 # for pretrained model
@@ -76,7 +76,8 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 #                                                'L2Normalization': L2Normalization,
 #                                                'compute_loss': ssd_loss.compute_loss})
 
-model.load_weights(weights_path, by_name=True)
+# model.load_weights(weights_path, by_name=True)
+
 adam = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 

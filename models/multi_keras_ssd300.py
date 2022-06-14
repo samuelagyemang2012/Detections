@@ -293,7 +293,7 @@ def multi_ssd_300(image_size,
         x1 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels), name='input_channel_swap')(
             x1)
         x1_2 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels),
-                      name='input_channel_swap')(x_2)
+                      name='input_channel_swap2')(x1_2)
 
     conv1_1 = Conv2D(64, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv1_1')(x1)
@@ -549,7 +549,7 @@ def multi_ssd_300(image_size,
     predictions = Concatenate(axis=2, name='predictions')([mbox_conf_softmax, mbox_loc, mbox_priorbox])
 
     if mode == 'training':
-        model = Model(inputs=x, outputs=predictions)
+        model = Model(inputs=[x, x_2], outputs=predictions)
     elif mode == 'inference':
         decoded_predictions = DecodeDetections(confidence_thresh=confidence_thresh,
                                                iou_threshold=iou_threshold,

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ssd_keras.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ssd_keras.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/multi_keras_ssd300.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/multi_keras_ssd300.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myssd300_multi_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_multi_training.py" afterDir="false" />
-    </list>
+    <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

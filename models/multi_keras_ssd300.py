@@ -283,12 +283,12 @@ def multi_ssd_300(image_size,
         x1 = Lambda(input_mean_normalization, output_shape=(img_height, img_width, img_channels),
                     name='input_mean_normalization1')(x1)
         x1_2 = Lambda(input_mean_normalization, output_shape=(img_height, img_width, img_channels),
-                      name='input_mean_normalization2')(x_2)
+                      name='input_mean_normalization2')(x1_2)
     if not (divide_by_stddev is None):
         x1 = Lambda(input_stddev_normalization, output_shape=(img_height, img_width, img_channels),
                     name='input_stddev_normalization1')(x1)
         x1_2 = Lambda(input_stddev_normalization, output_shape=(img_height, img_width, img_channels),
-                      name='input_stddev_normalization2')(x_2)
+                      name='input_stddev_normalization2')(x1_2)
     if swap_channels:
         x1 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels), name='input_channel_swap')(
             x1)

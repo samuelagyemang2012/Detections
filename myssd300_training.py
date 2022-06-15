@@ -86,8 +86,8 @@ val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=Non
 
 # Data path
 images_dir = 'C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/images/'
-train_labels_filename = 'data/cruw_train.csv'
-val_labels_filename = 'data/cruw_valid.csv'
+train_labels_filename = 'data/cruw_train_rgb.csv'
+val_labels_filename = 'data/cruw_valid_rgb.csv'
 
 # Load Data
 train_dataset.parse_csv(images_dir=images_dir,
@@ -169,6 +169,7 @@ val_generator = val_dataset.generate(batch_size=batch_size,
                                      returns={'processed_images',
                                               'encoded_labels'},
                                      keep_images_without_gt=False)
+
 
 train_dataset_size = train_dataset.get_dataset_size()
 val_dataset_size = val_dataset.get_dataset_size()

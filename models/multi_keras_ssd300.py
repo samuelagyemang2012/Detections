@@ -272,8 +272,8 @@ def multi_ssd_300(image_size,
     # Build the network.
     ############################################################################
 
-    x = Input(shape=(img_height, img_width, img_channels))
-    x_2 = Input(shape=(img_height, img_width, img_channels))
+    x = Input(shape=(img_height, img_width, img_channels), name='input_rgb')
+    x_2 = Input(shape=(img_height, img_width, img_channels), name='input_rf')
 
     # The following identity layer is only needed so that the subsequent lambda layers can be optional.
     x1 = Lambda(identity_layer, output_shape=(img_height, img_width, img_channels), name='identity_layer1')(x)
@@ -290,10 +290,8 @@ def multi_ssd_300(image_size,
         x1_2 = Lambda(input_stddev_normalization, output_shape=(img_height, img_width, img_channels),
                       name='input_stddev_normalization2')(x1_2)
     if swap_channels:
-        x1 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels), name='input_channel_swap')(
-            x1)
-        x1_2 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels),
-                      name='input_channel_swap2')(x1_2)
+        x1 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels), name='input_channel_swap')(x1)
+        x1_2 = Lambda(input_channel_swap, output_shape=(img_height, img_width, img_channels), name='input_channel_swap2')(x1_2)
 
     conv1_1 = Conv2D(64, (3, 3), activation='relu', padding='same', kernel_initializer='he_normal',
                      kernel_regularizer=l2(l2_reg), name='conv1_1')(x1)

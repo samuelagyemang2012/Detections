@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes" />
+    <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/data/cruw_test_rf.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_train_rf.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_valid_rf.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cruw_test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cruw_test_rgb.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cruw_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cruw_train_rgb.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cruw_valid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cruw_valid_rgb.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/multi_keras_ssd300.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/multi_keras_ssd300.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myssd300_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,11 +37,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/examples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\Projects\ssd_keras\data" />
       <recent name="D:\Pycharm Projects\ssd_keras\examples" />
       <recent name="C:\Users\Administrator\Desktop\ssd_keras\my_detections" />
       <recent name="D:\Pycharm Projects\ssd_keras" />
@@ -40,7 +53,7 @@
       <recent name="D:\Pycharm Projects\ssd_keras\notebooks" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.myssd300_multi_training">
+  <component name="RunManager" selected="Python.test">
     <configuration name="myinference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ssd_keras" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,10 +161,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.myssd300_multi_training" />
         <item itemvalue="Python.myssd300_training" />
         <item itemvalue="Python.myinference" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.video_inference" />
       </list>
     </recent_temporary>

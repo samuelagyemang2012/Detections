@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/data/cruw_test_rf.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/cruw_train_rf.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/cruw_valid_rf.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cruw_test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cruw_test_rgb.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cruw_train.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cruw_train_rgb.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cruw_valid.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cruw_valid_rgb.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/multi_keras_ssd300.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/multi_keras_ssd300.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myssd300_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myssd300_multi_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_multi_training.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +47,28 @@
       <recent name="D:\Pycharm Projects\ssd_keras\notebooks" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.myssd300_multi_training">
+    <configuration name="multi_keras_ssd300" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ssd_keras" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/multi_keras_ssd300.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="myinference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ssd_keras" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,34 +153,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="video_inference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ssd_keras" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/video_inference.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.myssd300_multi_training" />
         <item itemvalue="Python.myssd300_training" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.multi_keras_ssd300" />
         <item itemvalue="Python.myinference" />
-        <item itemvalue="Python.video_inference" />
       </list>
     </recent_temporary>
   </component>

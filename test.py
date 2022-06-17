@@ -49,7 +49,7 @@ variances = [0.1, 0.1, 0.2, 0.2]
 normalize_coords = True
 subtract_mean = [0, 0, 0]  # [123, 117, 104]  # [0, 0, 0]
 swap_channels = None  # [0, 1, 2]  # [2, 1, 0]
-
+batch_size = 4
 K.clear_session()
 
 # build ssd_300 model - for new mode
@@ -123,7 +123,7 @@ rf_val_dataset.parse_csv(images_dir=rf_images_dir,
                          include_classes='all')
 
 # Data augmentation
-batch_size = 4
+
 
 # data_augmentation_chain = DataAugmentationConstantInputSize(random_brightness=(-48, 48, 0.5),
 #                                                             random_contrast=(0.5, 1.8, 0.5),
@@ -196,11 +196,14 @@ def multi_gen(rgb_gen, rf_gen, batch_size_, ssd_data_augmentation_, ssd_input_en
     while True:
         rgb_X = next(rgb)
         rf_X = next(rf)
-        yield [rgb_X[0], rf_X[1]], rgb_X[1]
+        yield [rgb_X[0], rf_X[0]], rgb_X[1]
 
 
 train_multi_gen = multi_gen(rgb_train_dataset, rf_train_dataset, batch_size, ssd_data_augmentation, ssd_input_encoder)
 val_multi_gen = multi_gen(rgb_val_dataset, rf_val_dataset, batch_size, ssd_data_augmentation, ssd_input_encoder)
+
+tdata = next(train_multi_gen)
+vdata = next(val_multi_gen)
 
 
 def lr_schedule(epoch):
@@ -212,7 +215,7 @@ def lr_schedule(epoch):
         return 0.00001
 
 
-model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights.h5',
+model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights_multi.h5',
                                    monitor='val_loss',
                                    verbose=1,
                                    save_best_only=True,
@@ -246,7 +249,7 @@ callbacks = [
 
 # Train
 initial_epoch = 0
-final_epoch = 2  # 100
+final_epoch = 150  # 100
 steps_per_epoch = 1000
 
 history = model.fit(train_multi_gen,
@@ -254,7 +257,7 @@ history = model.fit(train_multi_gen,
                     epochs=final_epoch,
                     callbacks=callbacks,
                     validation_data=val_multi_gen,
-                    # validation_steps=ceil(val_dataset_size / batch_size),
+                    validation_steps=ceil(724 / batch_size),
                     initial_epoch=initial_epoch)
 
 # plt.figure(figsize=(20, 12))
@@ -262,5 +265,5 @@ history = model.fit(train_multi_gen,
 # plt.plot(history.history['val_loss'], label='val_loss')
 # plt.legend(loc='upper right', prop={'size': 24})
 
-model.save('./saved_models/cruw_model.h5')
+model.save('./saved_models/cruw_model_multi.h5')
 print("training complete. model saved")

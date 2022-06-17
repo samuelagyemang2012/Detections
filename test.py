@@ -48,7 +48,7 @@ clip_boxes = False
 variances = [0.1, 0.1, 0.2, 0.2]
 normalize_coords = True
 subtract_mean = [0, 0, 0]  # [123, 117, 104]  # [0, 0, 0]
-swap_channels = None  # [0, 1, 2]  # [2, 1, 0]
+swap_channels = [0, 1, 2]  # [2, 1, 0]
 batch_size = 4
 K.clear_session()
 
@@ -179,7 +179,7 @@ ssd_input_encoder = SSDInputEncoder(img_height=img_height,
 def multi_gen(rgb_gen, rf_gen, batch_size_, ssd_data_augmentation_, ssd_input_encoder_):
     rgb = rgb_gen.generate(batch_size=batch_size_,
                            shuffle=True,
-                           transformations=[ssd_data_augmentation_],
+                           transformations=[],  # [ssd_data_augmentation_],
                            label_encoder=ssd_input_encoder_,
                            returns={'processed_images',
                                     'encoded_labels'},
@@ -187,7 +187,7 @@ def multi_gen(rgb_gen, rf_gen, batch_size_, ssd_data_augmentation_, ssd_input_en
 
     rf = rf_gen.generate(batch_size=batch_size_,
                          shuffle=True,
-                         transformations=[ssd_data_augmentation_],
+                         transformations=[],  # [ssd_data_augmentation_],
                          label_encoder=ssd_input_encoder_,
                          returns={'processed_images',
                                   'encoded_labels'},
@@ -202,9 +202,14 @@ def multi_gen(rgb_gen, rf_gen, batch_size_, ssd_data_augmentation_, ssd_input_en
 train_multi_gen = multi_gen(rgb_train_dataset, rf_train_dataset, batch_size, ssd_data_augmentation, ssd_input_encoder)
 val_multi_gen = multi_gen(rgb_val_dataset, rf_val_dataset, batch_size, ssd_data_augmentation, ssd_input_encoder)
 
-tdata = next(train_multi_gen)
-vdata = next(val_multi_gen)
+t_imgs, t_labels = next(train_multi_gen)
+v_imgs, v_labels = next(val_multi_gen)
 
+
+# for t in t_imgs:
+#     for i in range(0, 2):
+#         cv2.imshow("", t[i])
+#         cv2.waitKey(-1)
 
 def lr_schedule(epoch):
     if epoch < 80:

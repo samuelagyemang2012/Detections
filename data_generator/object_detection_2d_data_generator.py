@@ -415,6 +415,7 @@ class DataGenerator:
 
         self.dataset_size = len(self.filenames)
         self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
+
         if self.load_images_into_memory:
             self.images = []
             if verbose:

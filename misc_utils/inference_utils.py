@@ -47,6 +47,10 @@ def do_detections(images_list_, image_base_path_, model_, img_height, img_width)
     return preds_decoded, orig_images
 
 
+# def do_detections_multi(image_list_1_,image_list_2_,image_base_path_1_,image_base_path_2_,model_,img_height,img_width):
+#     for i in range(0, len(image_list_1_)):
+#         rgb_img = imre
+
 def print_detections(detections_):
     for d in detections_:
         np.set_printoptions(precision=2, suppress=True, linewidth=90)
@@ -83,6 +87,7 @@ def cv_show_detection(detections_, image_, color, linewidth, class_names):
 
 
 def show_detections(detections_, image_list, image_base, class_names, dest_path_, img_height, img_width):
+    colors = ["#F28544", "#1DFA51", "#EDDC15", "#1E6AC2"]
     for i, d in enumerate(detections_):
         plt.figure(figsize=(20, 12))
         current_axis = plt.gca()
@@ -95,11 +100,13 @@ def show_detections(detections_, image_list, image_base, class_names, dest_path_
             ymin = box[3] * image_.shape[0] / img_height
             xmax = box[4] * image_.shape[1] / img_width
             ymax = box[5] * image_.shape[0] / img_height
+            class_ = int(box[0])
+            conf = box[1]
 
-            label = '{}: {:.2f}'.format(class_names[int(box[0])], box[1])
+            label = '{}: {:.2f}'.format(class_names[class_], conf)
             current_axis.add_patch(
-                plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color="orange", fill=False, linewidth=1))
-            current_axis.text(xmin, ymin, label, size='x-large', color='white',
-                              bbox={'facecolor': "orange", 'alpha': 1.0})
+                plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color=colors[class_], fill=False, linewidth=1))
+            current_axis.text(xmin, ymin, label, size='x-small', color='white',
+                              bbox={'facecolor': colors[class_], 'alpha': 1.0})
 
         plt.savefig(dest_path_ + name, dpi=100, bbox_inches="tight")

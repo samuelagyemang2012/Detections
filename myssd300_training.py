@@ -86,8 +86,8 @@ val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=Non
 
 # Data path
 images_dir = 'C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/images/'
-train_labels_filename = 'data/cruw_train_rgb.csv'
-val_labels_filename = 'data/cruw_valid_rgb.csv'
+train_labels_filename = 'data/cruw_train_data_rgb.csv'
+val_labels_filename = 'data/cruw_val_data_rgb.csv'
 
 # Load Data
 train_dataset.parse_csv(images_dir=images_dir,
@@ -170,7 +170,6 @@ val_generator = val_dataset.generate(batch_size=batch_size,
                                               'encoded_labels'},
                                      keep_images_without_gt=False)
 
-
 train_dataset_size = train_dataset.get_dataset_size()
 val_dataset_size = val_dataset.get_dataset_size()
 
@@ -187,7 +186,7 @@ def lr_schedule(epoch):
         return 0.00001
 
 
-model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights.h5',
+model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights_v2.h5',
                                    monitor='val_loss',
                                    verbose=1,
                                    save_best_only=True,
@@ -197,7 +196,7 @@ model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights.h5',
 
 early_stopping = EarlyStopping(monitor='val_loss',
                                min_delta=0.0,
-                               patience=10,
+                               patience=5,
                                verbose=1)
 
 learning_rate_scheduler = LearningRateScheduler(schedule=lr_schedule,
@@ -237,78 +236,78 @@ history = model.fit_generator(generator=train_generator,
 # plt.plot(history.history['val_loss'], label='val_loss')
 # plt.legend(loc='upper right', prop={'size': 24})
 
-model.save('./saved_models/cruw_model.h5')
+model.save('./saved_models/cruw_model_v2.h5')
 print("training complete. model saved")
 # ##################################################################################################################
 
 # Prediction
-predict_generator = val_dataset.generate(batch_size=2,
-                                         shuffle=True,
-                                         transformations=[convert_to_3_channels, resize],
-                                         label_encoder=None,
-                                         returns={'processed_images',
-                                                  'filenames',
-                                                  'inverse_transform',
-                                                  'original_images',
-                                                  'original_labels'},
-                                         keep_images_without_gt=False)
-
-batch_images, batch_filenames, batch_inverse_transforms, batch_original_images, batch_original_labels = next(
-    predict_generator)
-
-i = 0
-
-print("Image:", batch_filenames[i])
-print()
-print("Ground truth boxes:\n")
-print(np.array(batch_original_labels[i]))
+# predict_generator = val_dataset.generate(batch_size=2,
+#                                          shuffle=True,
+#                                          transformations=[convert_to_3_channels, resize],
+#                                          label_encoder=None,
+#                                          returns={'processed_images',
+#                                                   'filenames',
+#                                                   'inverse_transform',
+#                                                   'original_images',
+#                                                   'original_labels'},
+#                                          keep_images_without_gt=False)
+#
+# batch_images, batch_filenames, batch_inverse_transforms, batch_original_images, batch_original_labels = next(
+#     predict_generator)
+#
+# i = 0
+#
+# print("Image:", batch_filenames[i])
+# print()
+# print("Ground truth boxes:\n")
+# print(np.array(batch_original_labels[i]))
 
 # Make predictions
-y_pred = model.predict(batch_images)
-y_pred_decoded = decode_detections(y_pred,
-                                   confidence_thresh=0.5,
-                                   iou_threshold=0.45,
-                                   top_k=200,
-                                   normalize_coords=normalize_coords,
-                                   img_height=img_height,
-                                   img_width=img_width)
-
-y_pred_decoded_inv = apply_inverse_transforms(y_pred_decoded, batch_inverse_transforms)
-
-np.set_printoptions(precision=2, suppress=True, linewidth=90)
-print("Predicted boxes:\n")
-print('   class   conf xmin   ymin   xmax   ymax')
-print(y_pred_decoded_inv[i])
-
-# plt.figure(figsize=(20, 12))
-plt.imshow(batch_images[i])
-
-# Draw the predicted boxes onto the image
-colors = plt.cm.hsv(np.linspace(0, 1, n_classes + 1)).tolist()
-classes = ['background', 'car', 'cyclist', 'pedestrian']  # , 'bicyclist', 'light']
-# plt.figure(figsize=(20, 12))
-plt.imshow(batch_original_images[i])
-
-current_axis = plt.gca()
-
-for box in batch_original_labels[i]:
-    xmin = box[1]
-    ymin = box[2]
-    xmax = box[3]
-    ymax = box[4]
-    label = '{}'.format(classes[int(box[0])])
-    current_axis.add_patch(
-        plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color='green', fill=False, linewidth=2))
-    current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor': 'green', 'alpha': 1.0})
-
-for box in y_pred_decoded_inv[i]:
-    xmin = box[2]
-    ymin = box[3]
-    xmax = box[4]
-    ymax = box[5]
-    color = colors[int(box[0])]
-    label = '{}: {:.2f}'.format(classes[int(box[0])], box[1])
-    current_axis.add_patch(plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color=color, fill=False, linewidth=2))
-    current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor': color, 'alpha': 1.0})
-
-plt.savefig("./examples/detections.jpg", bbox_inches='tight')
+# y_pred = model.predict(batch_images)
+# y_pred_decoded = decode_detections(y_pred,
+#                                    confidence_thresh=0.5,
+#                                    iou_threshold=0.45,
+#                                    top_k=200,
+#                                    normalize_coords=normalize_coords,
+#                                    img_height=img_height,
+#                                    img_width=img_width)
+#
+# y_pred_decoded_inv = apply_inverse_transforms(y_pred_decoded, batch_inverse_transforms)
+#
+# np.set_printoptions(precision=2, suppress=True, linewidth=90)
+# print("Predicted boxes:\n")
+# print('   class   conf xmin   ymin   xmax   ymax')
+# print(y_pred_decoded_inv[i])
+#
+# # plt.figure(figsize=(20, 12))
+# plt.imshow(batch_images[i])
+#
+# # Draw the predicted boxes onto the image
+# colors = plt.cm.hsv(np.linspace(0, 1, n_classes + 1)).tolist()
+# classes = ['background', 'car', 'cyclist', 'pedestrian']  # , 'bicyclist', 'light']
+# # plt.figure(figsize=(20, 12))
+# plt.imshow(batch_original_images[i])
+#
+# current_axis = plt.gca()
+#
+# for box in batch_original_labels[i]:
+#     xmin = box[1]
+#     ymin = box[2]
+#     xmax = box[3]
+#     ymax = box[4]
+#     label = '{}'.format(classes[int(box[0])])
+#     current_axis.add_patch(
+#         plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color='green', fill=False, linewidth=2))
+#     current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor': 'green', 'alpha': 1.0})
+#
+# for box in y_pred_decoded_inv[i]:
+#     xmin = box[2]
+#     ymin = box[3]
+#     xmax = box[4]
+#     ymax = box[5]
+#     color = colors[int(box[0])]
+#     label = '{}: {:.2f}'.format(classes[int(box[0])], box[1])
+#     current_axis.add_patch(plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, color=color, fill=False, linewidth=2))
+#     current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor': color, 'alpha': 1.0})
+#
+# plt.savefig("./examples/detections.jpg", bbox_inches='tight')

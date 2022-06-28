@@ -2,8 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a752bc77-0a13-4b9d-85d9-4f63386ba51c" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/data/cruw_test_data_rf.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_test_data_rgb.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_train_data_rf.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_train_data_rgb.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_val_data_rf.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/cruw_val_data_rgb.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_examples/c0000000071.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_examples/c000071_0000.npy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/m8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/detection_results/s8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myevaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mymulti_evaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/ssd_weights_multi.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval_utils/average_precision_evaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval_utils/average_precision_evaluator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478020998721490820.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478020998721490820.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478021584075204499.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478021584075204499.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478021603076466949.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478021603076466949.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478731891987209643.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478731891987209643.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478731938439228892.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478731938439228892.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478732057724477245.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478732057724477245.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/1478732154069932560.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/1478732154069932560.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/48.png" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/48.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/Capture.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/Capture.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/a1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/a1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/a3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/a3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/a4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/a4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/a5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/a5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/a6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/a6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/a7.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/a7.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/dublin.png" beforeDir="false" afterPath="$PROJECT_DIR$/detection_results/dublin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/misc_utils/inference_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/misc_utils/inference_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myinference.py" beforeDir="false" afterPath="$PROJECT_DIR$/myinference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mymulti_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/mymulti_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myssd300_multi_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_multi_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myssd300_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/myssd300_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +72,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="23hZ71cuSDTsGkCF2BB1vIIn2wc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,23 +88,46 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../mAP-master/mAP-master" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\Projects\ssd_keras\detection_results" />
       <recent name="C:\Users\Administrator\Desktop\Projects\ssd_keras\data" />
+      <recent name="C:\Users\Administrator\Desktop\Projects\ssd_keras\examples" />
       <recent name="D:\Pycharm Projects\ssd_keras\examples" />
       <recent name="C:\Users\Administrator\Desktop\ssd_keras\my_detections" />
-      <recent name="D:\Pycharm Projects\ssd_keras" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\Projects\ssd_keras\detection_results" />
       <recent name="D:\Pycharm Projects\ssd_keras\examples" />
       <recent name="C:\Users\Administrator\Desktop\ssd_keras\weights" />
       <recent name="D:\Pycharm Projects\ssd_keras\notebooks" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mymulti_inference (1)">
+  <component name="RunManager" selected="Python.myevaluation">
+    <configuration name="myevaluation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ssd_keras" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myevaluation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="myinference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ssd_keras" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -58,6 +141,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myinference.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mymulti_evaluation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ssd_keras" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mymulti_evaluation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -87,27 +191,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="mymulti_inference" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ssd_keras" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Administrator\Desktop\Projects\ssd_keras\mymulti_inference.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="myssd300_multi_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ssd_keras" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,34 +212,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="myssd300_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ssd_keras" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/myssd300_training.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.myevaluation" />
+        <item itemvalue="Python.mymulti_evaluation" />
         <item itemvalue="Python.mymulti_inference (1)" />
         <item itemvalue="Python.myinference" />
-        <item itemvalue="Python.mymulti_inference" />
         <item itemvalue="Python.myssd300_multi_training" />
-        <item itemvalue="Python.myssd300_training" />
       </list>
     </recent_temporary>
   </component>

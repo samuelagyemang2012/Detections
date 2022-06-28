@@ -12,7 +12,7 @@ rgb_img_base_path = "C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CR
 rf_img_base_path = "C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/rf_maps/"
 rgb_data_path = "data/cruw_test_data_rgb.csv"
 rf_data_path = "data/cruw_test_data_rf.csv"
-dest_path = "C:/Users/Administrator/Desktop/my_detections/cruw/multi/lab_cv/"
+# dest_path = "C:/Users/Administrator/Desktop/my_detections/cruw/multi/lab/"
 
 # select data
 rgb_df = pd.read_csv(rgb_data_path)
@@ -33,10 +33,13 @@ detections = msu.do_multi_detections(rgb_list,
                                      img_width,
                                      confidence_threshold,
                                      iou_threshold)
-# print(len(detections))
-# msu.print_detections(detections)
 
-# save detections
-# msu.show_detections(detections, rgb_list, rgb_img_base_path, classes, dest_path, img_height, img_width)
-msu.show_detections_cv(detections, rgb_list, rgb_img_base_path, classes, dest_path, img_height, img_width, 1)
+gts = msu.get_ground_truths(rgb_data_path, 'image')
+processed_detections = msu.process_predictions(detections)
+
+print(len(gts))
+print(len(processed_detections))
+
+# msu.pickle_data(gts, "C:/Users/Administrator/Desktop/gts_" + str(limit) + ".sav")
+msu.pickle_data(processed_detections, "C:/Users/Administrator/Desktop/multi_preds.sav")
 print("Done")

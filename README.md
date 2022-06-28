@@ -10,15 +10,50 @@ This is a Keras port of the SSD model architecture introduced by Wei Liu et al. 
 
 ### Detections
 
-Below are some prediction examples of the fully trained original SSD300 model.
+Below are some prediction of the trained original SSD300 model.
+This model was trained on the [Udacity Self Driving cars dataset](https://www.kaggle.com/datasets/sshikamaru/udacity-self-driving-car-dataset).
+The detection results are seen below.
 
 | | |
 |---|---|
-| ![img01](./examples/1478020998721490820.jpg)| ![img01](./examples/1478021584075204499.jpg) |
-| ![img01](./examples/a6.jpg) | ![img01](./examples/a3.jpg) |
-| ![img01](./examples/a1.jpg) | ![img01](./examples/Capture.PNG) |
-| ![img01](./examples/a7.jpeg) | ![img01](./examples/dublin.png) |
-| ![img01](./examples/6.png) | ![img01](./examples/48.png) |
+| ![img01](detection_results/1478020998721490820.jpg)| ![img01](detection_results/1478021584075204499.jpg) |
+| ![img01](detection_results/a6.jpg) | ![img01](detection_results/a3.jpg) |
+| ![img01](detection_results/a1.jpg) | ![img01](detection_results/Capture.PNG) |
+| ![img01](detection_results/a7.jpeg) | ![img01](detection_results/dublin.png) |
+| ![img01](detection_results/6.png) | ![img01](detection_results/48.png) |
+
+# Multimodal Object Detecton
+The SSD model architecture has been modified for multimodal object detection using RGB images and radar range frequency maps. 
+The multimodal SSD object detector is trained on the [CRUW dataset](https://www.cruwdataset.org/introduction) and consists of 3 classes (cars, cyclist & pedestrian). 
+
+## Input Data Examples
+An example of the RGB image and radar range frequency map pairs used for training.
+
+|||
+|---|---|
+|![img01](./data_examples/c0000000071.jpg)|![img01](./data_examples/c000071_0000.npy.png)|
+
+## Detection Results-Single modal (RGB images only) vs Multimodal input
+| | |  
+|---|---|
+| ![img01](./detection_results/s1.jpg)| ![img01](./detection_results/m1.jpg) |
+| ![img01](./detection_results/s2.jpg)| ![img01](./detection_results/m2.jpg) |
+| ![img01](./detection_results/s3.jpg)| ![img01](./detection_results/m3.jpg) |
+| ![img01](./detection_results/s4.jpg)| ![img01](./detection_results/m4.jpg) |
+| ![img01](./detection_results/s5.jpg)| ![img01](./detection_results/m5.jpg) |
+| ![img01](./detection_results/s6.jpg)| ![img01](./detection_results/m6.jpg) |
+| ![img01](./detection_results/s7.jpg)| ![img01](./detection_results/m7.jpg) |
+| ![img01](./detection_results/s8.jpg)| ![img01](./detection_results/m8.jpg) |
+
+
+
+## mAP
+|**Model**|**VOC PASCAL mAP@0.5**|**COCO mAP@0.5**|
+|-----|----------------------|----------------|
+|Single modal model|35.8%|22.9%|
+|Multi-modal model|**52.3%**|**33.8%**|
+
+
 ### Dependencies
 
 * Python 3.x

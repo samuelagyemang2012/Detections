@@ -93,11 +93,11 @@ rf_val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=
 rgb_images_dir = 'C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/images/'
 rf_images_dir = 'C:/Users/Administrator/Desktop/datasets/CRUW/ALL/resized/CRUW_kaggle/rf_maps/'
 
-rgb_train_labels_filename = 'data/cruw_train_rgb.csv'
-rf_train_labels_filename = 'data/cruw_train_rf.csv'
+rgb_train_labels_filename = 'data/cruw_train_data_rgb.csv'
+rf_train_labels_filename = 'data/cruw_train_data_rf.csv'
 
-rgb_val_labels_filename = 'data/cruw_valid_rgb.csv'
-rf_val_labels_filename = 'data/cruw_valid_rf.csv'
+rgb_val_labels_filename = 'data/cruw_val_data_rgb.csv'
+rf_val_labels_filename = 'data/cruw_val_data_rf.csv'
 
 # Load Data
 rgb_train_dataset.parse_csv(images_dir=rgb_images_dir,
@@ -220,7 +220,7 @@ def lr_schedule(epoch):
         return 0.00001
 
 
-model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights_multi.h5',
+model_checkpoint = ModelCheckpoint(filepath='./weights/ssd_weights_multi_v2.h5',
                                    monitor='val_loss',
                                    verbose=1,
                                    save_best_only=True,
@@ -270,5 +270,5 @@ history = model.fit(train_multi_gen,
 # plt.plot(history.history['val_loss'], label='val_loss')
 # plt.legend(loc='upper right', prop={'size': 24})
 
-model.save('./saved_models/cruw_model_multi.h5')
+model.save('./saved_models/cruw_model_multi_v2.h5')
 print("training complete. model saved")

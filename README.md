@@ -23,11 +23,11 @@ The detection results are seen below.
 | ![img01](detection_results/6.png) | ![img01](detection_results/48.png) |
 
 # Multimodal Object Detecton
-The SSD model architecture has been modified for multimodal object detection using RGB images and radar range frequency maps. 
+The SSD model architecture has been modified for multimodal object detection using RGB images and range-azimuth frequency maps. 
 The multimodal SSD object detector is trained on the [CRUW dataset](https://www.cruwdataset.org/introduction) and consists of 3 classes (cars, cyclist & pedestrian). 
 
 ## Input Data Examples
-An example of the RGB image and radar range frequency map pairs used for training.
+An example of the RGB image and range-azimuth map pairs used for training.
 
 |||
 |---|---|

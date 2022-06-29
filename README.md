@@ -48,10 +48,15 @@ An example of the RGB image and radar range frequency map pairs used for trainin
 
 
 ## mAP
-|**Model**|**VOC PASCAL mAP@0.5**|**COCO mAP@0.5**|
-|-----|----------------------|----------------|
-|Single modal model|35.8%|22.9%|
-|Multi-modal model|**52.3%**|**33.8%**|
+|**Model**|mAP
+|-----|----------------------|
+|Single modal model|44.83%
+|Multi-modal model|**80.71%**|
+
+|||
+|-----|-----|
+|![img01](./detection_results/mAP_single.png)|![img01](./detection_results/mAP_multi.png)|
+
 
 
 ### Dependencies

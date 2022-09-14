@@ -1,12 +1,12 @@
 ## SSD: Single-Shot MultiBox Detector implementation in Keras
 ---
 ### Contents
-### Source: https://github.com/pierluigiferrari/ssd_keras
+### SSD Code Source: https://github.com/pierluigiferrari/ssd_keras
 
 
 ### Overview
 
-This is a Keras port of the SSD model architecture introduced by Wei Liu et al. in the paper [SSD: Single Shot MultiBox Detector](https://arxiv.org/abs/1512.02325).
+This is a Keras port of the SSD model architecture introduced by Wei Liu et al. in the paper [SSD: Single Shot MultiBox Detector](https://arxiv.org/abs/1512.02325). It has been modified for multimodal object detection using RGB and radar images.
 
 ### Detections
 
